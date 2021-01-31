@@ -13,7 +13,7 @@ const IndexPage = ({ data }) => {
       <pre>{JSON.stringify(data, null, 4)}</pre>
       <p>Welcome to your new Gatsby site.</p>
       <p>Now go build something great.</p>
-      <StaticQuery
+      {/* <StaticQuery
         query={query}
         render={data => (
           <ul>
@@ -22,7 +22,7 @@ const IndexPage = ({ data }) => {
             ))}
           </ul>
         )}
-      />
+      /> */}
       <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
         <Image />
       </div>
@@ -32,17 +32,17 @@ const IndexPage = ({ data }) => {
   )
 }
 
-export const query = graphql`
-query {
-  allStrapiRestaurant {
-    edges {
-      node {
-        strapiId
-        name
-        description
-      }
-    }
-  }
-}
-`
+// export const query = graphql`
+// query {
+//   allStrapiRestaurant! {
+//     edges {
+//       node {
+//         strapiId
+//         name
+//         description
+//       }
+//     }
+//   }
+// }
+// `
 export default IndexPage
