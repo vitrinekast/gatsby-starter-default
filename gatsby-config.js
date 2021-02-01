@@ -9,18 +9,19 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/strapi`,
-        name: `strapi`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
     },
-   
+    {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: `GraphCMS`,
+        fieldName: `gcms`,
+        url: 'https://api-eu-central-1.graphcms.com/v2/ckklggeitcz3501xmdc9f9zuh/master',
+      },
+    },
+
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

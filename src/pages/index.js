@@ -6,23 +6,19 @@ import Image from "../components/image"
 import SEO from "../components/seo"
 
 const IndexPage = ({ data }) => {
-  console.log(data);
+  console.log(data.gcms);
+  const projects = data.gcms.allProjects;
   return (
     <Layout>
       <SEO title="Home" />
       <pre>{JSON.stringify(data, null, 4)}</pre>
       <p>Welcome to your new Gatsby site.</p>
       <p>Now go build something great.</p>
-      {/* <StaticQuery
-        query={query}
-        render={data => (
-          <ul>
-            {data.allStrapiRestaurant.edges.map(restaurant => (
-              <li key={restaurant.node.strapiId}>{restaurant.node.name}</li>
-            ))}
-          </ul>
-        )}
-      /> */}
+      {projects.map((project, index) => (
+        <li key={index}><a href={project.slug}> {project.title}</a></li>
+      ))}
+
+
       <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
         <Image />
       </div>
@@ -32,17 +28,16 @@ const IndexPage = ({ data }) => {
   )
 }
 
-// export const query = graphql`
-// query {
-//   allStrapiRestaurant! {
-//     edges {
-//       node {
-//         strapiId
-//         name
-//         description
-//       }
-//     }
-//   }
-// }
-// `
+export const query = graphql`
+  query MyQuery {
+    gcms {
+      allProjects {
+        slug,
+        title
+      }
+    }
+  }
+
+
+`
 export default IndexPage
