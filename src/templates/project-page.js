@@ -53,7 +53,7 @@ export const query = graphql`
                     title
                     blockType
                     media {
-                    url(transformation: {image: {resize: {fit: clip, width: 800}}})
+                    url(transformation: {image: {resize: {width: 800}}})
                     }
                 }
                 slug

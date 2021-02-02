@@ -7,7 +7,7 @@ const fullWidthBlock = ({ title, media }) => {
   return (
     <div>
       <h3>{title}</h3>
-      <img src={img.url} />
+      <img className='media--fit' src={img.url} />
     </div>
   )
 }

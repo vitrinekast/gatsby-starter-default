@@ -2,41 +2,32 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 
-const splitBlock = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
+const gridBlock = ({ title, media }) => {
+
+  return (
+    <div>
+      <h3>{title}</h3>
+      <ul className='list--split'>
+        {media.slice(0, 2).map((item, index) => {
+          return (
+            <li className='list__item' key={index}>
+              <img className='media--fit' src={item.url} />
+            </li>
+          )
+        })}
+      </ul>
     </div>
-  </header>
-)
-
-splitBlock.propTypes = {
-  siteTitle: PropTypes.string,
+  )
 }
 
-splitBlock.defaultProps = {
-  siteTitle: ``,
+gridBlock.propTypes = {
+  title: PropTypes.string,
+  media: PropTypes.array
 }
 
-export default splitBlock
+gridBlock.defaultProps = {
+  title: ``,
+  media: []
+}
+
+export default gridBlock
