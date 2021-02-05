@@ -25,7 +25,7 @@ export default function Project({ data }) {
 
               <ul className="list--images">
                 {block.media.map((media, index) => (
-                  <Image key={index} src={media.url} label={media.fileName}></Image>
+                  <Image key={index} src={media.url} label={media.fileName} mimeType={media.mimeType}></Image>
                   
                 ))}
               </ul>
@@ -52,6 +52,7 @@ export const query = graphql`
           media {
             url(transformation: { image: { resize: { width: 800 } } })
             fileName
+            mimeType
           }
         }
         slug
