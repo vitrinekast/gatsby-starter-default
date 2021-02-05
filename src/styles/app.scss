@@ -1,7 +1,13 @@
-@import "reset";
-@import "config";
-@import "layout";
-@import "typography";
-@import "media";
-@import "lists";
-@import "card";
+@import "_config.scss";
+
+@import "base/reset.scss";
+@import "base/typography.scss";
+@import "base/layout.scss";
+
+@import "components/lists.scss";
+@import "components/media.scss";
+@import "components/header.scss";
+
+@import "elements/icon.scss";
+
+// @import "elements"

@@ -8,18 +8,29 @@ exports.createPages = async function ({ actions, graphql }) {
     const { data } = await graphql(`
     query MyQuery {
         gcms {
-        allProjects {
-            id
-            title
-            slug
+            allPages {
+                slug
+            }
+            allProjects {
+                slug
             }
         }
     }
+    
   `)
-    console.log(data);
-    data.gcms.allProjects.forEach(edge => {
+    
+    data.gcms.allPages.forEach(edge => {
+        
         actions.createPage({
             path: edge.slug,
+            component: require.resolve(`./src/templates/static-page.js`),
+            context: { slug: edge.slug },
+        })
+    })
+
+    data.gcms.allProjects.forEach(edge => {
+        actions.createPage({
+            path: `projects/${edge.slug}`,
             component: require.resolve(`./src/templates/project-page.js`),
             context: { slug: edge.slug },
         })

@@ -1,29 +1,36 @@
+import { graphql } from "gatsby"
 import React from "react"
-import { Link, graphql } from "gatsby"
-
+import FileListItem from "../components/FileListItem"
+import Header from "../components/header"
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
 const IndexPage = ({ data }) => {
-  // const projects = data.gcms.allProjects.concat(data.gcms.allProjects).concat(data.gcms.allProjects)
-  const projects = data.gcms.allProjects
-
   return (
     <Layout>
       <SEO title="Home" />
-      <ul className="list--grid">
-        {projects.map((project, index) => {
-          const img = project.allBlocks[0]?.media[0];
-          return (
-            <li key={index} className='list__item card--project'>
-              <Link to={`/projects/${project.slug}`}>
-                <img  className='media--fit' src={img?.url}/>
-                <h3 className='card__title'>{project.title}</h3>
-              </Link>
-            </li>
-          )
-        })}
+      <Header title="/" />
+
+      <ul className="list--files">
+        {data.gcms.allPages.map((page, index) => (
+          <FileListItem
+            to={page.slug}
+            key={index}
+            label={page.title}
+          ></FileListItem>
+        ))}
+
+        <FileListItem to="projects" label="Projects"></FileListItem>
+
+        <ul className="list--nested">
+          {data.gcms.allProjects.map((project, index) => (
+            <FileListItem
+              to={`projects/${project.slug}`}
+              key={index}
+              label={project.title}
+            ></FileListItem>
+          ))}
+        </ul>
       </ul>
     </Layout>
   )
@@ -32,13 +39,17 @@ const IndexPage = ({ data }) => {
 export const query = graphql`
   query MyQuery {
     gcms {
+      allPages {
+        title
+        slug
+      }
       allProjects {
         slug
         title
         allBlocks(first: 1) {
           media(first: 1) {
             id
-            url(transformation: {image: {resize: {width: 400}}})
+            url(transformation: { image: { resize: { width: 400 } } })
           }
         }
       }

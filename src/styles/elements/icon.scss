@@ -1,0 +1,30 @@
+.icon {
+  display: inline-block;
+  width: $icon--md;
+  height: $icon--md;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center center;
+  vertical-align: middle;
+
+  &--folder {
+    @extend .icon;
+    mask-image: url("../images/icons/icon--folder.svg");
+    background: orange;
+    margin-bottom: 2px;
+
+    &-file{
+      @extend .icon;
+      mask-image: url("../images/icons/icon--file2.svg");
+      background-color: orange;
+      margin-bottom: 2px;
+    }
+  }
+
+  &--parent-link {
+    @extend .icon;
+    mask-image: url("../images/icons/icon--back.svg") ;
+    background: blue ;
+    margin-bottom: 2px;
+  }
+}

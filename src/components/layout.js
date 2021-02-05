@@ -7,27 +7,12 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-
-import Header from "./header"
-import s from '../styles/app.scss';
-import Navigation from "./navigation";
-
+import s from "../styles/app.scss"
+import "fontsource-fira-mono"
 const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <Navigation></Navigation>
       <main>{children}</main>
     </>
   )

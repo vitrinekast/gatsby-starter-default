@@ -2,11 +2,13 @@ body,
 html {
     width: 100%;
     height: 100%;
+    margin: 0 0;
+    padding: 0 0;
 }
 
 %container {
-    max-width: 900px;
-    margin: 0 auto;
+    // max-width: 900px;
+    margin: 0 $gutter--lg;
 
     @media (max-width: 900px) {
         margin: 0 $gutter--lg;
@@ -17,6 +19,6 @@ main {
     @extend %container;
 }
 
-.header--main {
-    @extend %container;
+article {
+    max-width: 900px;
 }

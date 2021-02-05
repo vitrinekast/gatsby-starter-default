@@ -1,9 +1,0 @@
-.card {
-    &--project {
-        @extend .card;
-
-        img {
-            aspect-ratio: 1/1;
-        }
-    }
-}

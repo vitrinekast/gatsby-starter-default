@@ -1,64 +1,63 @@
-import React from "react"
 import { graphql } from "gatsby"
+import React from "react"
+import FileListItem from "../components/FileListItem"
+import Header from "../components/header"
+import Image from "../components/image"
 import Layout from "../components/layout"
-import fullWidthBlock from "../components/blocks/fullWidth";
-import splitBlock from "../components/blocks/split";
-import gridBlock from "../components/blocks/grid";
-
-
 
 export default function Project({ data }) {
+  const project = data.gcms.project
+  console.log(project)
 
-    const blocks = {
-        fullwidth: fullWidthBlock,
-        split: splitBlock,
-        grid: gridBlock
-    }
+  return (
+    <Layout>
+      <Header />
 
-    const post = data.gcms.allProjects[0];
-    console.log(post)
-    return (
-        <Layout>
-            <header>
-                <h2>{post.title}</h2>
-            </header>
-            <p>
-                {post.description}
-            </p>
+      <ul className="list--files">
+        <FileListItem to="/"></FileListItem>
+        {project.allBlocks.map((block, index) => (
+          <React.Fragment key={index}>
+            <FileListItem label={block.title} isOpen={true}></FileListItem>
 
-            <div className='list--sections'>
-                {post.allBlocks.map((block, index) => {
-                    const CurrentBlock = blocks[block.blockType.toLowerCase() || 'fullWidth'];
-                    return (
-                        <div className='section' key={index}>
-                            <CurrentBlock title={block.title} media={block.media}/>
-                        </div>
-                    )
-                })}
+            <div className="list__item--content">
+              <article
+                dangerouslySetInnerHTML={{ __html: block.body.html }}
+              ></article>
+
+              <ul className="list--images">
+                {block.media.map((media, index) => (
+                  <Image key={index} src={media.url} label={media.fileName}></Image>
+                  
+                ))}
+              </ul>
             </div>
-            <div>
-                <h1>{post.title}</h1>
-            </div>
-        </Layout>
-    )
+          </React.Fragment>
+        ))}
+      </ul>
+    </Layout>
+  )
 }
+
 export const query = graphql`
   query($slug: String!) {
-        gcms {
-            allProjects(where: {slug:$slug}) {
-                id
-                title
-                allBlocks {
-                    multiline
-                    title
-                    blockType
-                    media {
-                    url(transformation: {image: {resize: {width: 800}}})
-                    }
-                }
-                slug
-                description
-            }
+    gcms {
+      project(where: { slug: $slug }) {
+        id
+        title
+        allBlocks {
+          title
+          blockType
+          body {
+            html
+          }
+          media {
+            url(transformation: { image: { resize: { width: 800 } } })
+            fileName
+          }
         }
+        slug
+        description
+      }
+    }
   }
 `
