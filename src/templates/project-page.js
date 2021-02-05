@@ -7,7 +7,6 @@ import Layout from "../components/layout"
 
 export default function Project({ data }) {
   const project = data.gcms.project
-  console.log(project)
 
   return (
     <Layout>
