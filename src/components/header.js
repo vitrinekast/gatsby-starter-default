@@ -12,7 +12,7 @@ const Header = () => {
     <header className="header--main">
       <h1 className="header__title">
         Index of
-        <Link to={title}> {title}</Link>
+        {title && <Link to={title}> {title}</Link>}
       </h1>
     </header>
   )

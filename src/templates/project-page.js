@@ -24,10 +24,10 @@ export default function Project({ data }) {
               ></article>
 
               <ul className="list--images">
-                {block.media.map((media, index) => (
-                  <Image key={index} src={media.url} label={media.fileName} mimeType={media.mimeType}></Image>
+                {block.media.map((media, index) => { console.log(media); return (
+                  <Image key={index} id={media.id} mimeType={media.mimeType}></Image>
                   
-                ))}
+                )})}
               </ul>
             </div>
           </React.Fragment>
@@ -50,8 +50,7 @@ export const query = graphql`
             html
           }
           media {
-            url(transformation: { image: { resize: { width: 800 } } })
-            fileName
+            id
             mimeType
           }
         }
